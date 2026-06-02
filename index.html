@@ -4,260 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Linda Doe on X: "I found my daughter's diary..."</title>
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background: #000;
-    color: #e7e9ea;
-    min-height: 100vh;
-    display: flex; justify-content: center;
-  }
-
-  /* ===== Desktop Layout ===== */
-  .desktop {
-    display: flex; width: 100%; min-height: 100vh; justify-content: space-between;
-  }
-
-  /* ---- Left Sidebar ---- */
-  .sidebar-left {
-    width: 17.1875rem; flex-shrink: 0; padding: 0.75rem 0.5rem; display: flex; flex-direction: column;
-    position: sticky; top: 0; height: 100vh; align-items: flex-start;
-  }
-  .sidebar-left-inner {
-    width: 15.625rem; display: flex; flex-direction: column; height: 100%;
-  }
-  .nav-logo { padding: 0.5rem 0.75rem; display: flex; align-items: center; }
-  .nav-logo svg { width: 1.75rem; height: 1.75rem; fill: #e7e9ea; }
-  .nav-item {
-    display: flex; align-items: center; gap: 1rem; padding: 0.75rem;
-    border-radius: 9999px; cursor: pointer; font-size: 1.25rem; color: #e7e9ea;
-    transition: background 0.15s; text-decoration: none; margin-bottom: 0.125rem;
-  }
-  .nav-item:hover { background: rgba(255,255,255,0.08); }
-  .nav-item svg { width: 1.5rem; height: 1.5rem; fill: currentColor; flex-shrink: 0; }
-  .nav-item.active { font-weight: 700; }
-  .nav-post-btn {
-    background: #1d9bf0; color: #fff; border: none; padding: 1rem;
-    border-radius: 9999px; font-weight: 700; font-size: 0.9375rem; cursor: pointer;
-    margin-top: 0.75rem; width: 90%; transition: opacity 0.15s;
-  }
-  .nav-post-btn:hover { opacity: 0.9; }
-  .nav-user {
-    display: flex; align-items: center; gap: 0.625rem; padding: 0.75rem; border-radius: 9999px;
-    cursor: pointer; margin-top: auto; transition: background 0.15s;
-  }
-  .nav-user:hover { background: rgba(255,255,255,0.08); }
-  .nav-user-avatar {
-    width: 2.375rem; height: 2.375rem; border-radius: 50%; background: linear-gradient(135deg, #e84393, #6c5ce7);
-    display: flex; align-items: center; justify-content: center; flex-shrink: 0; overflow: hidden;
-  }
-  .nav-user-avatar img { width: 100%; height: 100%; object-fit: cover; }
-  .nav-user-info { flex:1; min-width: 0; }
-  .nav-user-name { font-size: 0.9375rem; font-weight: 700; }
-  .nav-user-handle { font-size: 0.8125rem; color: #71767b; }
-
-  /* ---- Center Column ---- */
-  .center-col {
-    width: 45rem; max-width: 45rem; flex-shrink: 0; border-left: 1px solid #2f3336; border-right: 1px solid #2f3336;
-    min-height: 100vh;
-  }
-
-  /* Post Header */
-  .post-header {
-    display: flex; align-items: center; gap: 1.5rem; padding: 0.75rem 1rem;
-    border-bottom: 1px solid #2f3336; position: sticky; top: 0; background: rgba(0,0,0,0.85);
-    backdrop-filter: blur(12px); z-index: 10;
-  }
-  .post-header-back { cursor: pointer; color: #e7e9ea; display: flex; align-items: center; }
-  .post-header-back:hover { opacity: 0.8; }
-  .post-header-title { font-size: 1.25rem; font-weight: 700; }
-
-  /* Tweet */
-  .tweet { padding: 1rem; border-bottom: 1px solid #2f3336; }
-  .tweet-avatar-row { display: flex; gap: 0.625rem; }
-  .tweet-avatar {
-    width: 3rem; height: 3rem; border-radius: 50%; background: linear-gradient(135deg, #e84393, #6c5ce7);
-    display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; overflow: hidden;
-  }
-  .tweet-avatar svg { width: 1.625rem; height: 1.625rem; fill: rgba(255,255,255,0.9); }
-  .tweet-avatar-sm {
-    width: 2.25rem; height: 2.25rem; border-radius: 50%; display: flex;
-    align-items: center; justify-content: space-between; flex-shrink: 0; overflow: hidden;
-  }
-  .tweet-avatar-sm svg { width: 1.25rem; height: 1.25rem; fill: rgba(255,255,255,0.9); }
-
-  .tweet-body { flex: 1; min-width: 0; }
-  .tweet-author { display: flex; align-items: center; gap: 0.25rem; flex-wrap: wrap; }
-  .tweet-name { font-weight: 700; font-size: 0.9375rem; display: flex; align-items: center; gap: 0.1875rem; }
-  .verified-badge { display: inline-flex; }
-  .verified-badge svg { width: 1.125rem; height: 1.125rem; fill: #1d9bf0; }
-  .tweet-handle { color: #71767b; font-size: 0.9375rem; }
-  .tweet-text { margin-top: 0.75rem; font-size: 0.9375rem; line-height: 1.5; color: #e7e9ea; }
-  .tweet-text-sm { font-size: 0.9375rem; line-height: 1.5; color: #e7e9ea; margin-top: 0.25rem; }
-  .tweet-text .hashtag { color: #1d9bf0; }
-  .tweet-text .warning { color: #ff6b6b; font-weight: 600; }
-  .tweet-time-bar { margin-top: 1rem; padding-bottom: 1rem; border-bottom: 1px solid #2f3336; font-size: 0.8125rem; color: #71767b; display: flex; align-items: center; gap: 0.375rem; }
-  .mention { color: #1d9bf0; }
-
-  /* Image grid */
-  .image-grid {
-    margin-top: 0.75rem; border-radius: 1rem; overflow: hidden;
-    border: 1px solid #2f3336; display: grid; gap: 2px;
-  }
-  .image-grid.grid-4 { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; aspect-ratio: 1 / 1; }
-	  .image-grid.grid-3 { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; aspect-ratio: 16 / 9; }
-	  .image-grid.grid-3 .grid-img:first-child { grid-row: 1 / -1; }
-	  .image-grid.grid-1 { display: block; aspect-ratio: auto; border: none; }
-	  .image-grid.grid-1 .grid-img { border-radius: 1rem; max-height: 32rem; object-fit: contain; }
-  .grid-img {
-    width: 100%; height: 100%; object-fit: cover; cursor: pointer;
-    display: block; transition: filter 0.15s;
-  }
-  .grid-img:hover { filter: brightness(1.15); }
-
-  /* Stats bar */
-  .stats-bar {
-    display: flex; gap: 1rem; padding: 1rem; font-size: 0.8125rem; color: #71767b;
-    border-bottom: 1px solid #2f3336;
-  }
-  .stats-bar .num { color: #e7e9ea; font-weight: 700; }
-
-  /* Actions */
-  .tweet-actions {
-    display: flex; justify-content: space-around; padding: 0.75rem 0;
-    border-bottom: 1px solid #2f3336;
-  }
-  .action {
-    display: flex; align-items: center; gap: 0.375rem; color: #71767b; font-size: 0.8125rem;
-    cursor: pointer; transition: color 0.15s; border: none; background: none; padding: 0.5rem 0.75rem;
-    border-radius: 9999px;
-  }
-  .action svg { width: 1.25rem; height: 1.25rem; fill: currentColor; }
-  .action:hover { background: rgba(255,255,255,0.05); }
-  .action-reply:hover { color: #1d9bf0; }
-  .action-retweet:hover { color: #00ba7c; }
-  .action-like:hover { color: #f91880; }
-  .action-bookmark:hover { color: #1d9bf0; }
-  .action-share:hover { color: #1d9bf0; }
-
-  /* Reply input */
-  .reply-composer {
-    display: flex; align-items: center; gap: 0.75rem; padding: 1rem;
-    border-bottom: 1px solid #2f3336;
-  }
-  .reply-composer-avatar {
-    width: 2.25rem; height: 2.25rem; border-radius: 50%; background: #2f3336;
-    display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; overflow: hidden;
-  }
-  .reply-composer-avatar svg { width: 1.25rem; height: 1.25rem; fill: #71767b; }
-  .reply-composer-input { flex: 1; background: transparent; border: none; color: #71767b; font-size: 0.9375rem; outline: none; }
-
-  /* ===== Comments / Replies ===== */
-  .comments-divider {
-    padding: 0.75rem 1rem; font-size: 0.8125rem; color: #71767b;
-    border-bottom: 1px solid #2f3336;
-  }
-  .reply-tweet { padding: 0.75rem 1rem; border-bottom: 1px solid #2f3336; cursor: default; transition: background 0.15s; }
-  .reply-tweet:hover { background: rgba(255,255,255,0.02); }
-  .reply-tweet .tweet-avatar-row { display: flex; gap: 0.5rem; }
-  .reply-to { font-size: 0.8125rem; color: #71767b; margin-bottom: 0.25rem; }
-  .reply-to .mention { color: #1d9bf0; }
-  .reply-actions { display: flex; gap: 1.5rem; margin-top: 0.5rem; }
-  .reply-actions .action { font-size: 0.8125rem; padding: 0.25rem 0; }
-  .reply-actions .action svg { width: 1rem; height: 1rem; }
-
-	  /* Thread continuation posts by OP */
-	  .thread-tweet { padding: 0.75rem 1rem; border-bottom: 1px solid #2f3336; }
-	  .thread-tweet .tweet-avatar-row { display: flex; gap: 0.5rem; }
-	  .thread-connector { color: #71767b; font-size: 0.8125rem; padding: 0.25rem 0 0.5rem 2.75rem; }
-
-  /* ---- Right Sidebar ---- */
-  .sidebar-right {
-    width: 21.875rem; flex-shrink: 0; padding: 0.75rem 1rem; display: flex; flex-direction: column; gap: 1rem;
-    position: sticky; top: 0; height: 100vh; overflow-y: auto;
-  }
-  .sidebar-right-inner { width: 18.75rem; }
-  .search-box {
-    display: flex; align-items: center; gap: 0.625rem; background: #202327; border-radius: 9999px;
-    padding: 0.625rem 1rem; margin-top: 0.25rem;
-  }
-  .search-box svg { width: 1.125rem; height: 1.125rem; fill: #71767b; flex-shrink: 0; }
-  .search-box input {
-    background: transparent; border: none; color: #e7e9ea; font-size: 0.9375rem; outline: none; width: 100%;
-  }
-  .search-box input::placeholder { color: #71767b; }
-
-  .side-card {
-    background: #16181c; border-radius: 1rem; overflow: hidden;
-  }
-  .side-card h3 { font-size: 1.25rem; font-weight: 800; padding: 0.75rem 1rem; }
-  .side-card .trend-item {
-    padding: 0.75rem 1rem; cursor: pointer; transition: background 0.15s;
-  }
-  .side-card .trend-item:hover { background: rgba(255,255,255,0.03); }
-  .trend-cat { font-size: 0.8125rem; color: #71767b; }
-  .trend-name { font-size: 0.9375rem; font-weight: 700; margin-top: 0.125rem; }
-  .trend-count { font-size: 0.8125rem; color: #71767b; margin-top: 0.125rem; }
-  .side-showmore { padding: 0.75rem 1rem; font-size: 0.8125rem; color: #1d9bf0; cursor: pointer; }
-  .follow-btn-sm {
-    background: #fff; color: #000; border: none; padding: 0.375rem 1rem;
-    border-radius: 9999px; font-weight: 700; font-size: 0.8125rem; cursor: pointer;
-  }
-
-  /* ===== Lightbox ===== */
-  .lightbox {
-    display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0,0,0,0.95); z-index: 1000; align-items: center; justify-content: space-between;
-    flex-direction: column;
-  }
-  .lightbox.open { display: flex; }
-  .lightbox-close {
-    position: absolute; top: 1rem; left: 1rem; cursor: pointer; color: #e7e9ea;
-    background: rgba(255,255,255,0.1); border-radius: 9999px; width: 2.25rem; height: 2.25rem;
-    display: flex; align-items: center; justify-content: space-between; border: none; font-size: 1.25rem;
-  }
-  .lightbox-close:hover { background: rgba(255,255,255,0.2); }
-  .lightbox-img { max-width: 90vw; max-height: 85vh; border-radius: 0.25rem; object-fit: contain; }
-  .lightbox-counter { color: #71767b; font-size: 0.875rem; margin-top: 0.75rem; }
-  .lightbox-nav {
-    position: absolute; top: 50%; transform: translateY(-50%); cursor: pointer;
-    color: #e7e9ea; background: rgba(255,255,255,0.1); border-radius: 9999px;
-    width: 2.5rem; height: 2.5rem; display: flex; align-items: center; justify-content: space-between;
-    border: none; font-size: 1.375rem; transition: background 0.15s;
-  }
-  .lightbox-nav:hover { background: rgba(255,255,255,0.25); }
-  .lightbox-prev { left: 1rem; }
-  .lightbox-next { right: 1rem; }
-
-  /* ===== Responsive ===== */
-  @media (max-width: 1300px) {
-    .sidebar-right { width: 18.125rem; }
-    .sidebar-right-inner { width: 15.625rem; }
-    .sidebar-left { width: 4.5rem; }
-    .sidebar-left-inner { width: 3.5rem; align-items: center; }
-    .sidebar-left .nav-item { justify-content: space-between; }
-    .sidebar-left .nav-item span { display: none; }
-    .sidebar-left .nav-post-btn { font-size: 1.5rem; width: 3rem; height: 3rem; padding: 0; border-radius: 50%; }
-    .sidebar-left .nav-post-btn::after { content: '+'; }
-    .sidebar-left .nav-user-info { display: none; }
-    .nav-user > svg { display: none; }
-    .center-col { width: 45rem; max-width: 45rem; }
-  }
-  @media (max-width: 1000px) {
-    .sidebar-right { display: none; }
-    .desktop { justify-content: flex-start; }
-  }
-  @media (max-width: 700px) {
-    .sidebar-left { display: none; }
-    .center-col { width: 100%; max-width: 100%; }
-    .desktop { justify-content: space-between; }
-  }
-  @media (max-width: 600px) {
-    .tweet-text { font-size: 0.9375rem; }
-  }
-</style>
+<link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
@@ -269,20 +16,25 @@
     <div class="nav-logo">
       <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
     </div>
-    <a class="nav-item active"><svg viewBox="0 0 24 24"><path d="M12 3.75H4.5a.75.75 0 0 0-.75.75v15c0 .414.336.75.75.75h15a.75.75 0 0 0 .75-.75v-15a.75.75 0 0 0-.75-.75H12zm0 0v6.75h7.5v8.25a.75.75 0 0 1-.75.75H12V3.75zM4.5 19.5h7.5v-7.5H4.5v7.5z"/></svg> <span>Home</span></a>
-    <a class="nav-item"><svg viewBox="0 0 24 24"><path d="M10.25 3.75a.75.75 0 0 0-.75.75v3.75H5.75a.75.75 0 0 0 0 1.5H9.5v3.75a.75.75 0 0 0 1.5 0V9.75h3.75a.75.75 0 0 0 0-1.5H11V4.5a.75.75 0 0 0-.75-.75z"/></svg> <span>Explore</span></a>
-    <a class="nav-item"><svg viewBox="0 0 24 24"><path d="M19.993 9.042a8.062 8.062 0 0 0-15.996.009L2.866 18H7.1a5.002 5.002 0 0 0 9.8 0h4.236l-1.143-8.958zM12 20.5a3.5 3.5 0 0 1-3.173-2.5h6.346A3.5 3.5 0 0 1 12 20.5z"/></svg> <span>Notifications</span></a>
-    <a class="nav-item"><svg viewBox="0 0 24 24"><path d="M17.863 4.074c1.424 0 2.637 1.149 2.637 2.566v10.72c0 1.417-1.213 2.566-2.637 2.566H6.137C5.713 19.926 3 19.926 3 19.926s0-1.926.863-1.926h.274V6.64c0-1.417 1.213-2.566 2.637-2.566h11.09zM8.637 7.5v8.25h1.5V7.5h-1.5zm3.75 0v8.25h1.5V7.5h-1.5zm3.75 0v8.25h1.5V7.5h-1.5z"/></svg> <span>Messages</span></a>
-    <a class="nav-item"><svg viewBox="0 0 24 24"><path d="M4.5 3.75a3.002 3.002 0 0 0-3 3v10.5a3.002 3.002 0 0 0 3 3h15a3.002 3.002 0 0 0 3-3V6.75a3.002 3.002 0 0 0-3-3h-15zm10.5 9.75a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm-6 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/></svg> <span>Communities</span></a>
-    <a class="nav-item"><svg viewBox="0 0 24 24"><path d="M5.651 19.632c.484 0 .921-.118 1.31-.355.389-.236.706-.555.95-.955a2.353 2.353 0 0 0 .36-1.276c0-.494-.12-.92-.36-1.276a2.134 2.134 0 0 0-.95-.953 2.42 2.42 0 0 0-1.31-.354c-.485 0-.921.118-1.31.354-.389.236-.706.554-.95.953a2.364 2.364 0 0 0-.36 1.276c0 .494.12.919.36 1.276.244.4.56.719.95.955.389.237.826.355 1.31.355zm6.349 0c.484 0 .921-.118 1.31-.355a2.55 2.55 0 0 0 .95-.955c.244-.357.366-.774.366-1.252 0-3.569-1.114-5.694-2.142-8.155-.46-1.107-1.48-3.195-2.59-3.195-.488 0-.898.348-1.022.834-.45 1.765-.754 3.27-.967 4.564-.873.454-1.563.982-2.07 1.581A3.512 3.512 0 0 0 7 15.022c0 .992.39 1.877 1.047 2.498.656.62 1.516.948 2.37.948h1.583v.164c0 .494.122.92.366 1.276s.561.719.95.955c.389.237.826.355 1.31.355h.374v-1.584h-.3z"/></svg> <span>Profile</span></a>
+    <a class="nav-item active"><svg viewBox="0 0 24 24"><path d="M12 3L4 9v12h5v-7h6v7h5V9z"/></svg> <span>Home</span></a>
+    <a class="nav-item"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg> <span>Explore</span></a>
+    <a class="nav-item"><svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 00-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a1.8 1.8 0 01-3.4 0"/></svg> <span>Notifications</span></a>
+    <a class="nav-item"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg> <span>Messages</span></a>
+    <a class="nav-item"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2-6-4.8-6 4.8 2.4-7.2-6-4.8h7.6z"/></svg> <span>Grok</span></a>
+    <a class="nav-item"><svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg> <span>Bookmarks</span></a>
+    <a class="nav-item"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.9M16 3.1a4 4 0 010 7.8"/></svg> <span>Communities</span></a>
+    <a class="nav-item"><svg viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg> <span>Creator Studio</span></a>
+    <a class="nav-item"><svg viewBox="0 0 24 24" style="fill:currentColor;stroke:none;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> <span>Premium</span></a>
+    <a class="nav-item"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8z"/></svg> <span>Profile</span></a>
+    <a class="nav-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg> <span>More</span></a>
     <button class="nav-post-btn">Post</button>
     <div class="nav-user">
-      <div class="nav-user-avatar">
-        <img src="Profile_Picture_Images/906c78c1baae6fcf84f75ca05631412e.png" style="width:100%;height:100%;object-fit:cover;">
+      <div class="nav-user-avatar" style="background:linear-gradient(135deg,#1d9bf0,#6c5ce7);">
+        <svg viewBox="0 0 24 24" style="width:60%;height:60%;fill:rgba(255,255,255,0.7);"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
       </div>
       <div class="nav-user-info">
-        <div class="nav-user-name">Linda Doe</div>
-        <div class="nav-user-handle">@MomsWarning</div>
+        <div class="nav-user-name">Writing 50</div>
+        <div class="nav-user-handle">@Writing50</div>
       </div>
       <svg width="18" height="18" viewBox="0 0 24 24" fill="#71767b"><path d="M6.414 9l4.293 4.293-4.293 4.293L5 16.172 7.828 13.5 5 10.828 6.414 9zM12 16.172L14.828 13.5 12 10.828 13.414 9.414l4.293 4.293-4.293 4.293L12 16.172z"/></svg>
     </div>
@@ -311,56 +63,49 @@
             <span class="tweet-name">
               Linda Doe
               <span class="verified-badge">
-                <svg viewBox="0 0 24 24"><path d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.154-.435.238-.905.238-1.4 0-2.21-1.71-3.998-3.818-3.998-.47 0-.92.084-1.336.25C14.818 2.415 13.51 1.5 12 1.5s-2.816.917-3.437 2.25a3.606 3.606 0 0 0-1.336-.25c-2.11 0-3.818 1.79-3.818 4 0 .494.083.964.237 1.4-1.272.65-2.147 2.018-2.147 3.6 0 1.495.782 2.798 1.942 3.486-.02.17-.032.34-.032.514 0 2.21 1.708 4 3.818 4 .47 0 .92-.086 1.335-.25.62 1.334 1.926 2.25 3.437 2.25 1.512 0 2.818-.916 3.437-2.25.415.163.865.248 1.336.248 2.11 0 3.818-1.79 3.818-4 0-.174-.012-.344-.033-.513 1.158-.687 1.943-1.99 1.943-3.484zm-6.616-3.334l-4.334 6.5c-.145.217-.382.334-.625.334-.043 0-.088-.004-.13-.012-.287-.065-.482-.305-.53-.6l-1.05-5.35-1.766 1.768c-.17.17-.397.266-.636.266-.222 0-.434-.082-.597-.24-.347-.33-.36-.89-.03-1.237l2.94-3.1c.196-.207.48-.3.77-.28.29.025.548.175.694.4l.887 1.405 3.513-5.192c.266-.393.79-.498 1.185-.235.395.263.5.788.24 1.183z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
               </span>
             </span>
             <span class="tweet-handle">@MomsWarning</span>
+            <span style="color:#71767b;font-size:0.8125rem;">· May 12</span>
           </div>
 
           <div class="tweet-text">
             I hope every parent and teenager sees this post before consulting a cosmetic surgeon. Please, protect yourself and your loved ones.<br><br>
             My daughter, Jane, had been getting cosmetic surgeries for years. At first, it was just a minor eyelid procedure when she was 18. I signed the consent form to approve it, never expecting the ongoing tragedy that would follow. She became completely obsessed with cosmetic surgery, and I couldn't stop her. By the time she was 22, she had replaced every single organ in her body—her hands, her skin, her brain, and her heart.<br><br>
             0% of her original DNA remains. ZERO. These surgeries took my daughter away from me.<br><br>
-            I photographed these pages from her diary. I need parents and teenagers to see what really happened.
+            Jane always wanted others to hear her story. In her own words: "If my transformation can inspire even one person, share it." I'm sharing it now, but I hope you all can see the heartbreaking story of what I see.<br><br>
+            I scanned these pages from her diary. I need parents and teenagers to see what really happened.
           </div>
 
-          <!-- 4-image grid: key diary pages -->
-          <div class="image-grid grid-4" id="tweetImages">
-            <img class="grid-img" src="Diary_Images/1.png" alt="Diary page — Jane's first entry at 18, the eyelid surgery" data-index="0">
-            <img class="grid-img" src="Diary_Images/2.png" alt="Diary page — she thought it would stop there" data-index="1">
-            <img class="grid-img" src="Diary_Images/3.png" alt="Diary page — the obsession began to grow" data-index="2">
-            <img class="grid-img" src="Diary_Images/4.png" alt="Diary page — she couldn't recognize herself anymore" data-index="3">
+          <!-- 4-image grid: key diary pages 1-4 -->
+          <div class="image-grid grid-4">
+            <img class="grid-img" src="Diary_Images/1.png" alt="Diary page 1 — Jane's first entry at 18, the eyelid surgery" data-index="0">
+            <img class="grid-img" src="Diary_Images/2.png" alt="Diary page 2 — she thought it would stop there" data-index="1">
+            <img class="grid-img" src="Diary_Images/3.png" alt="Diary page 3 — the obsession began to grow" data-index="2">
+            <img class="grid-img" src="Diary_Images/4.png" alt="Diary page 4 — she couldn't recognize herself anymore" data-index="3">
           </div>
 
-          <div class="tweet-time-bar">
-            11:42 AM · May 12, 2026 <span style="color:#71767b;">·</span> <strong style="color:#e7e9ea;">8.9M</strong> Views
+          <div class="tweet-time-bar" style="border-bottom:none;">
+            11:42 AM · May 12, 2026 · <strong style="color:#e7e9ea;">8.9M</strong> Views
           </div>
 
-          <!-- Stats -->
-          <div class="stats-bar" style="border-bottom:none;padding-left:0;padding-right:0;">
-            <span><span class="num">156K</span> Reposts</span>
-            <span><span class="num">18.7K</span> Quotes</span>
-            <span><span class="num">412K</span> Likes</span>
-            <span><span class="num">24.3K</span> Bookmarks</span>
-          </div>
-
-          <!-- Action buttons -->
-          <div class="tweet-actions">
-            <button class="action action-reply">
-              <svg viewBox="0 0 24 24"><path d="M1.751 10c0-4.42 3.584-8 8.005-8h4.488c4.42 0 8.005 3.58 8.005 8s-3.584 8-8.005 8h-2.06l-4.693 4.692c-.46.46-1.234.15-1.234-.54V17c-2.67-.88-4.506-3.42-4.506-7z"/></svg>
-            </button>
-            <button class="action action-retweet">
-              <svg viewBox="0 0 24 24"><path d="M4.5 3.88l4.432 4.14-1.364 1.46L5.5 7.55V16c0 1.1.896 2 2 2H13v2H7.5c-2.209 0-4-1.79-4-4V7.55L1.432 9.48.068 8.02 4.5 3.88zM16.5 6H11V4h5.5c2.209 0 4 1.79 4 4v8.45l2.068-1.93 1.364 1.46-4.432 4.14-4.432-4.14 1.364-1.46 2.068 1.93V8c0-1.1-.896-2-2-2z"/></svg>
-            </button>
-            <button class="action action-like">
-              <svg viewBox="0 0 24 24"><path d="M16.697 5.5c-1.222-.06-2.679.51-3.89 2.16l-.805 1.09-.806-1.09C9.984 6.01 8.526 5.44 7.304 5.5c-1.243.07-2.349.78-2.91 1.91-.552 1.12-.633 2.78.479 4.82 1.074 1.97 3.257 4.27 7.129 6.61 3.87-2.34 6.052-4.64 7.126-6.61 1.111-2.04 1.03-3.7.477-4.82-.561-1.13-1.666-1.84-2.908-1.91zm4.187 7.69c-1.351 2.48-4.001 5.12-8.379 7.67l-.503.3-.504-.3c-4.379-2.55-7.029-5.19-8.382-7.67-1.36-2.5-1.41-4.86-.514-6.67.887-1.79 2.647-2.91 4.601-3.01 1.651-.09 3.368.56 4.798 2.01 1.429-1.45 3.146-2.1 4.796-2.01 1.954.1 3.714 1.22 4.601 3.01.896 1.81.846 4.17-.514 6.67z"/></svg>
-            </button>
-            <button class="action action-bookmark">
-              <svg viewBox="0 0 24 24"><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2h11A2.5 2.5 0 0 1 20 4.5v17.44l-8-5.71-8 5.71V4.5z"/></svg>
-            </button>
-            <button class="action action-share">
-              <svg viewBox="0 0 24 24"><path d="M12 3.786l6.364 6.364-1.414 1.414L13 7.614v10.6h-2V7.614L6.95 11.564 5.536 10.15 12 3.786zM4 20h16v-5h2v6a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-6h2v5z"/></svg>
-            </button>
+          <div class="tweet-actions" style="border-bottom:1px solid #2f3336;">
+            <span class="action action-reply" style="gap:0.375rem;">
+              <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg> 156K
+            </span>
+            <span class="action action-retweet" style="gap:0.375rem;">
+              <svg viewBox="0 0 24 24"><path d="M17 1l4 4-4 4M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4M21 13v2a4 4 0 01-4 4H3"/></svg> 18.7K
+            </span>
+            <span class="action action-like" style="gap:0.375rem;">
+              <svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 00-7.8 7.8l1 1.1 7.8 7.8 7.8-7.8 1-1.1a5.5 5.5 0 000-7.8z"/></svg> 412K
+            </span>
+            <span class="action action-bookmark" style="gap:0.375rem;">
+              <svg viewBox="0 0 24 24"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg> 24.3K
+            </span>
+            <span class="action action-share" style="gap:0.375rem;">
+              <svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8M16 6l-4-4-4 4M12 2v13"/></svg> 2.3K
+            </span>
           </div>
         </div>
       </div>
@@ -379,24 +124,25 @@
             <span class="tweet-name">
               Linda Doe
               <span class="verified-badge">
-                <svg viewBox="0 0 24 24"><path d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.154-.435.238-.905.238-1.4 0-2.21-1.71-3.998-3.818-3.998-.47 0-.92.084-1.336.25C14.818 2.415 13.51 1.5 12 1.5s-2.816.917-3.437 2.25a3.606 3.606 0 0 0-1.336-.25c-2.11 0-3.818 1.79-3.818 4 0 .494.083.964.237 1.4-1.272.65-2.147 2.018-2.147 3.6 0 1.495.782 2.798 1.942 3.486-.02.17-.032.34-.032.514 0 2.21 1.708 4 3.818 4 .47 0 .92-.086 1.335-.25.62 1.334 1.926 2.25 3.437 2.25 1.512 0 2.818-.916 3.437-2.25.415.163.865.248 1.336.248 2.11 0 3.818-1.79 3.818-4 0-.174-.012-.344-.033-.513 1.158-.687 1.943-1.99 1.943-3.484zm-6.616-3.334l-4.334 6.5c-.145.217-.382.334-.625.334-.043 0-.088-.004-.13-.012-.287-.065-.482-.305-.53-.6l-1.05-5.35-1.766 1.768c-.17.17-.397.266-.636.266-.222 0-.434-.082-.597-.24-.347-.33-.36-.89-.03-1.237l2.94-3.1c.196-.207.48-.3.77-.28.29.025.548.175.694.4l.887 1.405 3.513-5.192c.266-.393.79-.498 1.185-.235.395.263.5.788.24 1.183z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
               </span>
             </span>
             <span class="tweet-handle">@MomsWarning</span>
+            <span style="color:#71767b;font-size:0.8125rem;">· May 12</span>
           </div>
           <div class="tweet-text-sm">
-            More pages from Jane's diary. Page after page, she wrote about every procedure — the pain, the recovery, the hope that the next surgery would finally make her happy.
+            More pages from Jane's diary. She wrote about her procedure — the pain, the recovery, and the hope that the next surgery would finally make her happy.
           </div>
-          <div class="image-grid grid-3" id="tweetImages2">
-            <img class="grid-img" src="Diary_Images/5.png" alt="Diary page — writing about the pain after surgery" data-index="4">
-            <img class="grid-img" src="Diary_Images/6.png" alt="Diary page — hoping the next surgery would fix everything" data-index="5">
-            <img class="grid-img" src="Diary_Images/7.png" alt="Diary page — she couldn't stop" data-index="6">
+          <div class="image-grid grid-3">
+            <img class="grid-img" src="Diary_Images/5.png" alt="Diary page 5 — writing about the pain after surgery" data-index="4">
+            <img class="grid-img" src="Diary_Images/6.png" alt="Diary page 6 — hoping the next surgery would fix everything" data-index="5">
+            <img class="grid-img" src="Diary_Images/7.png" alt="Diary page 7 — she couldn't stop" data-index="6">
           </div>
           <div class="reply-actions">
-            <button class="action action-reply"><svg viewBox="0 0 24 24"><path d="M1.751 10c0-4.42 3.584-8 8.005-8h4.488c4.42 0 8.005 3.58 8.005 8s-3.584 8-8.005 8h-2.06l-4.693 4.692c-.46.46-1.234.15-1.234-.54V17c-2.67-.88-4.506-3.42-4.506-7z"/></svg> 12.8K</button>
-            <button class="action action-retweet"><svg viewBox="0 0 24 24"><path d="M4.5 3.88l4.432 4.14-1.364 1.46L5.5 7.55V16c0 1.1.896 2 2 2H13v2H7.5c-2.209 0-4-1.79-4-4V7.55L1.432 9.48.068 8.02 4.5 3.88zM16.5 6H11V4h5.5c2.209 0 4 1.79 4 4v8.45l2.068-1.93 1.364 1.46-4.432 4.14-4.432-4.14 1.364-1.46 2.068 1.93V8c0-1.1-.896-2-2-2z"/></svg> 45.1K</button>
-            <button class="action action-like"><svg viewBox="0 0 24 24"><path d="M16.697 5.5c-1.222-.06-2.679.51-3.89 2.16l-.805 1.09-.806-1.09C9.984 6.01 8.526 5.44 7.304 5.5c-1.243.07-2.349.78-2.91 1.91-.552 1.12-.633 2.78.479 4.82 1.074 1.97 3.257 4.27 7.129 6.61 3.87-2.34 6.052-4.64 7.126-6.61 1.111-2.04 1.03-3.7.477-4.82-.561-1.13-1.666-1.84-2.908-1.91zm4.187 7.69c-1.351 2.48-4.001 5.12-8.379 7.67l-.503.3-.504-.3c-4.379-2.55-7.029-5.19-8.382-7.67-1.36-2.5-1.41-4.86-.514-6.67.887-1.79 2.647-2.91 4.601-3.01 1.651-.09 3.368.56 4.798 2.01 1.429-1.45 3.146-2.1 4.796-2.01 1.954.1 3.714 1.22 4.601 3.01.896 1.81.846 4.17-.514 6.67z"/></svg> 187K</button>
-            <button class="action action-share"><svg viewBox="0 0 24 24"><path d="M12 3.786l6.364 6.364-1.414 1.414L13 7.614v10.6h-2V7.614L6.95 11.564 5.536 10.15 12 3.786zM4 20h16v-5h2v6a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-6h2v5z"/></svg></button>
+            <button class="action action-reply"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg> 12.8K</button>
+            <button class="action action-retweet"><svg viewBox="0 0 24 24"><path d="M17 1l4 4-4 4M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4M21 13v2a4 4 0 01-4 4H3"/></svg> 45.1K</button>
+            <button class="action action-like"><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 00-7.8 7.8l1 1.1 7.8 7.8 7.8-7.8 1-1.1a5.5 5.5 0 000-7.8z"/></svg> 187K</button>
+            <button class="action action-share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8M16 6l-4-4-4 4M12 2v13"/></svg></button>
           </div>
         </div>
       </div>
@@ -413,24 +159,24 @@
             <span class="tweet-name">
               Linda Doe
               <span class="verified-badge">
-                <svg viewBox="0 0 24 24"><path d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.154-.435.238-.905.238-1.4 0-2.21-1.71-3.998-3.818-3.998-.47 0-.92.084-1.336.25C14.818 2.415 13.51 1.5 12 1.5s-2.816.917-3.437 2.25a3.606 3.606 0 0 0-1.336-.25c-2.11 0-3.818 1.79-3.818 4 0 .494.083.964.237 1.4-1.272.65-2.147 2.018-2.147 3.6 0 1.495.782 2.798 1.942 3.486-.02.17-.032.34-.032.514 0 2.21 1.708 4 3.818 4 .47 0 .92-.086 1.335-.25.62 1.334 1.926 2.25 3.437 2.25 1.512 0 2.818-.916 3.437-2.25.415.163.865.248 1.336.248 2.11 0 3.818-1.79 3.818-4 0-.174-.012-.344-.033-.513 1.158-.687 1.943-1.99 1.943-3.484zm-6.616-3.334l-4.334 6.5c-.145.217-.382.334-.625.334-.043 0-.088-.004-.13-.012-.287-.065-.482-.305-.53-.6l-1.05-5.35-1.766 1.768c-.17.17-.397.266-.636.266-.222 0-.434-.082-.597-.24-.347-.33-.36-.89-.03-1.237l2.94-3.1c.196-.207.48-.3.77-.28.29.025.548.175.694.4l.887 1.405 3.513-5.192c.266-.393.79-.498 1.185-.235.395.263.5.788.24 1.183z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
               </span>
             </span>
             <span class="tweet-handle">@MomsWarning</span>
+            <span style="color:#71767b;font-size:0.8125rem;">· May 12</span>
           </div>
           <div class="tweet-text-sm">
-            The clinics never said no. Each time they told her it was routine. She trusted them. We all did.
+            The clinics never said no to her. Each time she visited them, they told her she was just 'one step away from being perfect.
           </div>
-          <div class="image-grid grid-3" id="tweetImages3">
-            <img class="grid-img" src="Diary_Images/8.png" alt="Diary page — she trusted the clinics" data-index="7">
-            <img class="grid-img" src="Diary_Images/9.png" alt="Diary page — each procedure was sold as routine" data-index="8">
-            <img class="grid-img" src="Diary_Images/10.png" alt="Diary page — she kept going back" data-index="9">
+          <div class="image-grid grid-2">
+            <img class="grid-img" src="Diary_Images/8.png" alt="Diary page 8 — she trusted the clinics" data-index="7">
+            <img class="grid-img" src="Diary_Images/9.png" alt="Diary page 9 — each procedure was sold as routine" data-index="8">
           </div>
           <div class="reply-actions">
-            <button class="action action-reply"><svg viewBox="0 0 24 24"><path d="M1.751 10c0-4.42 3.584-8 8.005-8h4.488c4.42 0 8.005 3.58 8.005 8s-3.584 8-8.005 8h-2.06l-4.693 4.692c-.46.46-1.234.15-1.234-.54V17c-2.67-.88-4.506-3.42-4.506-7z"/></svg> 9.4K</button>
-            <button class="action action-retweet"><svg viewBox="0 0 24 24"><path d="M4.5 3.88l4.432 4.14-1.364 1.46L5.5 7.55V16c0 1.1.896 2 2 2H13v2H7.5c-2.209 0-4-1.79-4-4V7.55L1.432 9.48.068 8.02 4.5 3.88zM16.5 6H11V4h5.5c2.209 0 4 1.79 4 4v8.45l2.068-1.93 1.364 1.46-4.432 4.14-4.432-4.14 1.364-1.46 2.068 1.93V8c0-1.1-.896-2-2-2z"/></svg> 31.2K</button>
-            <button class="action action-like"><svg viewBox="0 0 24 24"><path d="M16.697 5.5c-1.222-.06-2.679.51-3.89 2.16l-.805 1.09-.806-1.09C9.984 6.01 8.526 5.44 7.304 5.5c-1.243.07-2.349.78-2.91 1.91-.552 1.12-.633 2.78.479 4.82 1.074 1.97 3.257 4.27 7.129 6.61 3.87-2.34 6.052-4.64 7.126-6.61 1.111-2.04 1.03-3.7.477-4.82-.561-1.13-1.666-1.84-2.908-1.91zm4.187 7.69c-1.351 2.48-4.001 5.12-8.379 7.67l-.503.3-.504-.3c-4.379-2.55-7.029-5.19-8.382-7.67-1.36-2.5-1.41-4.86-.514-6.67.887-1.79 2.647-2.91 4.601-3.01 1.651-.09 3.368.56 4.798 2.01 1.429-1.45 3.146-2.1 4.796-2.01 1.954.1 3.714 1.22 4.601 3.01.896 1.81.846 4.17-.514 6.67z"/></svg> 154K</button>
-            <button class="action action-share"><svg viewBox="0 0 24 24"><path d="M12 3.786l6.364 6.364-1.414 1.414L13 7.614v10.6h-2V7.614L6.95 11.564 5.536 10.15 12 3.786zM4 20h16v-5h2v6a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-6h2v5z"/></svg></button>
+            <button class="action action-reply"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg> 9.4K</button>
+            <button class="action action-retweet"><svg viewBox="0 0 24 24"><path d="M17 1l4 4-4 4M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4M21 13v2a4 4 0 01-4 4H3"/></svg> 31.2K</button>
+            <button class="action action-like"><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 00-7.8 7.8l1 1.1 7.8 7.8 7.8-7.8 1-1.1a5.5 5.5 0 000-7.8z"/></svg> 154K</button>
+            <button class="action action-share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8M16 6l-4-4-4 4M12 2v13"/></svg></button>
           </div>
         </div>
       </div>
@@ -447,22 +193,24 @@
             <span class="tweet-name">
               Linda Doe
               <span class="verified-badge">
-                <svg viewBox="0 0 24 24"><path d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.154-.435.238-.905.238-1.4 0-2.21-1.71-3.998-3.818-3.998-.47 0-.92.084-1.336.25C14.818 2.415 13.51 1.5 12 1.5s-2.816.917-3.437 2.25a3.606 3.606 0 0 0-1.336-.25c-2.11 0-3.818 1.79-3.818 4 0 .494.083.964.237 1.4-1.272.65-2.147 2.018-2.147 3.6 0 1.495.782 2.798 1.942 3.486-.02.17-.032.34-.032.514 0 2.21 1.708 4 3.818 4 .47 0 .92-.086 1.335-.25.62 1.334 1.926 2.25 3.437 2.25 1.512 0 2.818-.916 3.437-2.25.415.163.865.248 1.336.248 2.11 0 3.818-1.79 3.818-4 0-.174-.012-.344-.033-.513 1.158-.687 1.943-1.99 1.943-3.484zm-6.616-3.334l-4.334 6.5c-.145.217-.382.334-.625.334-.043 0-.088-.004-.13-.012-.287-.065-.482-.305-.53-.6l-1.05-5.35-1.766 1.768c-.17.17-.397.266-.636.266-.222 0-.434-.082-.597-.24-.347-.33-.36-.89-.03-1.237l2.94-3.1c.196-.207.48-.3.77-.28.29.025.548.175.694.4l.887 1.405 3.513-5.192c.266-.393.79-.498 1.185-.235.395.263.5.788.24 1.183z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
               </span>
             </span>
             <span class="tweet-handle">@MomsWarning</span>
+            <span style="color:#71767b;font-size:0.8125rem;">· May 12</span>
           </div>
           <div class="tweet-text-sm">
-            Jane's final diary entry. By the end, she had replaced everything — her hand, her skin, her brain, her heart. These pages are all I have left of the daughter I knew. Please, learn from her story.
+            Jane's final diary entry. By the end, she had replaced everything — her hands, her skin, her brain, her heart. The daughter I knew only lives within these pages now. Please, don't let this happen to someone you love."
           </div>
-          <div class="image-grid grid-1" id="tweetImages4">
-            <img class="grid-img" src="Diary_Images/11.png" alt="Diary page — Jane's final entry" data-index="10">
+          <div class="image-grid grid-2">
+            <img class="grid-img" src="Diary_Images/10.png" alt="Diary page 10 — she kept going back" data-index="9">
+            <img class="grid-img" src="Diary_Images/11.png" alt="Diary page 11 — Jane's final entry" data-index="10">
           </div>
           <div class="reply-actions">
-            <button class="action action-reply"><svg viewBox="0 0 24 24"><path d="M1.751 10c0-4.42 3.584-8 8.005-8h4.488c4.42 0 8.005 3.58 8.005 8s-3.584 8-8.005 8h-2.06l-4.693 4.692c-.46.46-1.234.15-1.234-.54V17c-2.67-.88-4.506-3.42-4.506-7z"/></svg> 18.2K</button>
-            <button class="action action-retweet"><svg viewBox="0 0 24 24"><path d="M4.5 3.88l4.432 4.14-1.364 1.46L5.5 7.55V16c0 1.1.896 2 2 2H13v2H7.5c-2.209 0-4-1.79-4-4V7.55L1.432 9.48.068 8.02 4.5 3.88zM16.5 6H11V4h5.5c2.209 0 4 1.79 4 4v8.45l2.068-1.93 1.364 1.46-4.432 4.14-4.432-4.14 1.364-1.46 2.068 1.93V8c0-1.1-.896-2-2-2z"/></svg> 62.7K</button>
-            <button class="action action-like"><svg viewBox="0 0 24 24"><path d="M16.697 5.5c-1.222-.06-2.679.51-3.89 2.16l-.805 1.09-.806-1.09C9.984 6.01 8.526 5.44 7.304 5.5c-1.243.07-2.349.78-2.91 1.91-.552 1.12-.633 2.78.479 4.82 1.074 1.97 3.257 4.27 7.129 6.61 3.87-2.34 6.052-4.64 7.126-6.61 1.111-2.04 1.03-3.7.477-4.82-.561-1.13-1.666-1.84-2.908-1.91zm4.187 7.69c-1.351 2.48-4.001 5.12-8.379 7.67l-.503.3-.504-.3c-4.379-2.55-7.029-5.19-8.382-7.67-1.36-2.5-1.41-4.86-.514-6.67.887-1.79 2.647-2.91 4.601-3.01 1.651-.09 3.368.56 4.798 2.01 1.429-1.45 3.146-2.1 4.796-2.01 1.954.1 3.714 1.22 4.601 3.01.896 1.81.846 4.17-.514 6.67z"/></svg> 298K</button>
-            <button class="action action-share"><svg viewBox="0 0 24 24"><path d="M12 3.786l6.364 6.364-1.414 1.414L13 7.614v10.6h-2V7.614L6.95 11.564 5.536 10.15 12 3.786zM4 20h16v-5h2v6a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-6h2v5z"/></svg></button>
+            <button class="action action-reply"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg> 18.2K</button>
+            <button class="action action-retweet"><svg viewBox="0 0 24 24"><path d="M17 1l4 4-4 4M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4M21 13v2a4 4 0 01-4 4H3"/></svg> 62.7K</button>
+            <button class="action action-like"><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 00-7.8 7.8l1 1.1 7.8 7.8 7.8-7.8 1-1.1a5.5 5.5 0 000-7.8z"/></svg> 298K</button>
+            <button class="action action-share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8M16 6l-4-4-4 4M12 2v13"/></svg></button>
           </div>
         </div>
       </div>
@@ -470,10 +218,11 @@
 
     <!-- Reply composer -->
     <div class="reply-composer">
-      <div class="reply-composer-avatar">
-        <img src="Profile_Picture_Images/906c78c1baae6fcf84f75ca05631412e.png" style="width:100%;height:100%;object-fit:cover;">
+      <div class="reply-composer-avatar" style="background:linear-gradient(135deg,#1d9bf0,#6c5ce7);">
+        <svg viewBox="0 0 24 24" style="width:60%;height:60%;fill:rgba(255,255,255,0.7);"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
       </div>
-      <input class="reply-composer-input" placeholder="Post your reply..." readonly>
+      <input class="reply-composer-input" placeholder="Post your reply...">
+      <button class="nav-post-btn" style="width:auto;padding:0.5rem 1.25rem;margin-top:0;font-size:0.875rem;">Reply</button>
     </div>
 
     <!-- ===== Comments ===== -->
@@ -493,13 +242,13 @@
           </div>
           <div class="reply-to">Replying to <span class="mention">@MomsWarning</span></div>
           <div class="tweet-text-sm">
-            As a plastic surgeon: this is a wake-up call. We have an ethical obligation to screen for body dysmorphia and say NO when a patient is chasing an impossible standard. The industry needs reform. Thank you for sharing, Linda. <span class="hashtag">#MedEthics</span>
+            As a plastic surgeon: this is a wake-up call. We have an ethical obligation to say NO when a patient is chasing an impossible standard. The industry needs to establish a clear standard. <span class="hashtag">#MedEthics</span>
           </div>
           <div class="reply-actions">
-            <button class="action action-reply"><svg viewBox="0 0 24 24"><path d="M1.751 10c0-4.42 3.584-8 8.005-8h4.488c4.42 0 8.005 3.58 8.005 8s-3.584 8-8.005 8h-2.06l-4.693 4.692c-.46.46-1.234.15-1.234-.54V17c-2.67-.88-4.506-3.42-4.506-7z"/></svg> 847</button>
-            <button class="action action-retweet"><svg viewBox="0 0 24 24"><path d="M4.5 3.88l4.432 4.14-1.364 1.46L5.5 7.55V16c0 1.1.896 2 2 2H13v2H7.5c-2.209 0-4-1.79-4-4V7.55L1.432 9.48.068 8.02 4.5 3.88zM16.5 6H11V4h5.5c2.209 0 4 1.79 4 4v8.45l2.068-1.93 1.364 1.46-4.432 4.14-4.432-4.14 1.364-1.46 2.068 1.93V8c0-1.1-.896-2-2-2z"/></svg> 3.2K</button>
-            <button class="action action-like"><svg viewBox="0 0 24 24"><path d="M16.697 5.5c-1.222-.06-2.679.51-3.89 2.16l-.805 1.09-.806-1.09C9.984 6.01 8.526 5.44 7.304 5.5c-1.243.07-2.349.78-2.91 1.91-.552 1.12-.633 2.78.479 4.82 1.074 1.97 3.257 4.27 7.129 6.61 3.87-2.34 6.052-4.64 7.126-6.61 1.111-2.04 1.03-3.7.477-4.82-.561-1.13-1.666-1.84-2.908-1.91zm4.187 7.69c-1.351 2.48-4.001 5.12-8.379 7.67l-.503.3-.504-.3c-4.379-2.55-7.029-5.19-8.382-7.67-1.36-2.5-1.41-4.86-.514-6.67.887-1.79 2.647-2.91 4.601-3.01 1.651-.09 3.368.56 4.798 2.01 1.429-1.45 3.146-2.1 4.796-2.01 1.954.1 3.714 1.22 4.601 3.01.896 1.81.846 4.17-.514 6.67z"/></svg> 12.4K</button>
-            <button class="action action-share"><svg viewBox="0 0 24 24"><path d="M12 3.786l6.364 6.364-1.414 1.414L13 7.614v10.6h-2V7.614L6.95 11.564 5.536 10.15 12 3.786zM4 20h16v-5h2v6a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-6h2v5z"/></svg></button>
+            <button class="action action-reply"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg> 847</button>
+            <button class="action action-retweet"><svg viewBox="0 0 24 24"><path d="M17 1l4 4-4 4M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4M21 13v2a4 4 0 01-4 4H3"/></svg> 3.2K</button>
+            <button class="action action-like"><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 00-7.8 7.8l1 1.1 7.8 7.8 7.8-7.8 1-1.1a5.5 5.5 0 000-7.8z"/></svg> 12.4K</button>
+            <button class="action action-share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8M16 6l-4-4-4 4M12 2v13"/></svg></button>
           </div>
         </div>
       </div>
@@ -522,20 +271,20 @@
             I'm 19 and already had 3 procedures. This thread made me cry. I see myself in those early diary photos — every surgery made me find 3 new things to "fix." I'm canceling my next consultation. <span class="hashtag">#Enough</span>
           </div>
           <div class="reply-actions">
-            <button class="action action-reply"><svg viewBox="0 0 24 24"><path d="M1.751 10c0-4.42 3.584-8 8.005-8h4.488c4.42 0 8.005 3.58 8.005 8s-3.584 8-8.005 8h-2.06l-4.693 4.692c-.46.46-1.234.15-1.234-.54V17c-2.67-.88-4.506-3.42-4.506-7z"/></svg> 1.4K</button>
-            <button class="action action-retweet"><svg viewBox="0 0 24 24"><path d="M4.5 3.88l4.432 4.14-1.364 1.46L5.5 7.55V16c0 1.1.896 2 2 2H13v2H7.5c-2.209 0-4-1.79-4-4V7.55L1.432 9.48.068 8.02 4.5 3.88zM16.5 6H11V4h5.5c2.209 0 4 1.79 4 4v8.45l2.068-1.93 1.364 1.46-4.432 4.14-4.432-4.14 1.364-1.46 2.068 1.93V8c0-1.1-.896-2-2-2z"/></svg> 6.7K</button>
-            <button class="action action-like"><svg viewBox="0 0 24 24"><path d="M16.697 5.5c-1.222-.06-2.679.51-3.89 2.16l-.805 1.09-.806-1.09C9.984 6.01 8.526 5.44 7.304 5.5c-1.243.07-2.349.78-2.91 1.91-.552 1.12-.633 2.78.479 4.82 1.074 1.97 3.257 4.27 7.129 6.61 3.87-2.34 6.052-4.64 7.126-6.61 1.111-2.04 1.03-3.7.477-4.82-.561-1.13-1.666-1.84-2.908-1.91zm4.187 7.69c-1.351 2.48-4.001 5.12-8.379 7.67l-.503.3-.504-.3c-4.379-2.55-7.029-5.19-8.382-7.67-1.36-2.5-1.41-4.86-.514-6.67.887-1.79 2.647-2.91 4.601-3.01 1.651-.09 3.368.56 4.798 2.01 1.429-1.45 3.146-2.1 4.796-2.01 1.954.1 3.714 1.22 4.601 3.01.896 1.81.846 4.17-.514 6.67z"/></svg> 28.9K</button>
-            <button class="action action-share"><svg viewBox="0 0 24 24"><path d="M12 3.786l6.364 6.364-1.414 1.414L13 7.614v10.6h-2V7.614L6.95 11.564 5.536 10.15 12 3.786zM4 20h16v-5h2v6a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-6h2v5z"/></svg></button>
+            <button class="action action-reply"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg> 1.4K</button>
+            <button class="action action-retweet"><svg viewBox="0 0 24 24"><path d="M17 1l4 4-4 4M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4M21 13v2a4 4 0 01-4 4H3"/></svg> 6.7K</button>
+            <button class="action action-like"><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 00-7.8 7.8l1 1.1 7.8 7.8 7.8-7.8 1-1.1a5.5 5.5 0 000-7.8z"/></svg> 28.9K</button>
+            <button class="action action-share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8M16 6l-4-4-4 4M12 2v13"/></svg></button>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Reply 3: The Guardian -->
+    <!-- Reply 3: The Guardian (Article Link) -->
     <div class="reply-tweet">
       <div class="tweet-avatar-row">
-        <div class="tweet-avatar-sm" style="background:linear-gradient(135deg,#e17055,#fdcb6e);">
-          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+        <div class="tweet-avatar-sm">
+          <img src="Profile_Picture_Images/6a2352baa05e427bc6286499eb0852aa.png" style="width:100%;height:100%;object-fit:cover;">
         </div>
         <div class="tweet-body">
           <div class="tweet-author">
@@ -545,13 +294,22 @@
           </div>
           <div class="reply-to">Replying to <span class="mention">@MomsWarning</span></div>
           <div class="tweet-text-sm">
-            OPINION: "When cosmetic surgery becomes a conveyor belt — Linda Doe's viral thread exposes the dark side of the $60 billion aesthetic medicine industry."
+            OPINION: “When cosmetic surgery becomes a conveyor belt — Linda Doe’s viral thread exposes the dark side of the $60 billion aesthetic medicine industry.”
           </div>
+          <!-- Article link card -->
+          <a class="article-link-card" href="#" style="display:block;border:1px solid #2f3336;border-radius:16px;overflow:hidden;margin-top:0.75rem;text-decoration:none;color:inherit;transition:background 0.2s;">
+            <img src="Profile_Picture_Images/Screenshot 2026-06-02 at 12.00.57 AM.png" style="width:100%;display:block;" alt="Article image">
+            <div style="padding:0.75rem 1rem;">
+              <div style="font-size:0.8125rem;color:#71767b;text-transform:uppercase;letter-spacing:0.02em;">theguardian.com</div>
+              <div style="font-weight:700;font-size:0.9375rem;color:#e7e9ea;margin-top:0.25rem;line-height:1.3;">'I couldn't stop her': One mother's warning about the true cost of cosmetic surgery</div>
+              <div style="font-size:0.8125rem;color:#71767b;margin-top:0.25rem;line-height:1.4;">Linda Doe's viral thread has ignited a global conversation about body dysmorphia, informed consent, and an industry that keeps saying yes.</div>
+            </div>
+          </a>
           <div class="reply-actions">
-            <button class="action action-reply"><svg viewBox="0 0 24 24"><path d="M1.751 10c0-4.42 3.584-8 8.005-8h4.488c4.42 0 8.005 3.58 8.005 8s-3.584 8-8.005 8h-2.06l-4.693 4.692c-.46.46-1.234.15-1.234-.54V17c-2.67-.88-4.506-3.42-4.506-7z"/></svg> 2.1K</button>
-            <button class="action action-retweet"><svg viewBox="0 0 24 24"><path d="M4.5 3.88l4.432 4.14-1.364 1.46L5.5 7.55V16c0 1.1.896 2 2 2H13v2H7.5c-2.209 0-4-1.79-4-4V7.55L1.432 9.48.068 8.02 4.5 3.88zM16.5 6H11V4h5.5c2.209 0 4 1.79 4 4v8.45l2.068-1.93 1.364 1.46-4.432 4.14-4.432-4.14 1.364-1.46 2.068 1.93V8c0-1.1-.896-2-2-2z"/></svg> 8.4K</button>
-            <button class="action action-like"><svg viewBox="0 0 24 24"><path d="M16.697 5.5c-1.222-.06-2.679.51-3.89 2.16l-.805 1.09-.806-1.09C9.984 6.01 8.526 5.44 7.304 5.5c-1.243.07-2.349.78-2.91 1.91-.552 1.12-.633 2.78.479 4.82 1.074 1.97 3.257 4.27 7.129 6.61 3.87-2.34 6.052-4.64 7.126-6.61 1.111-2.04 1.03-3.7.477-4.82-.561-1.13-1.666-1.84-2.908-1.91zm4.187 7.69c-1.351 2.48-4.001 5.12-8.379 7.67l-.503.3-.504-.3c-4.379-2.55-7.029-5.19-8.382-7.67-1.36-2.5-1.41-4.86-.514-6.67.887-1.79 2.647-2.91 4.601-3.01 1.651-.09 3.368.56 4.798 2.01 1.429-1.45 3.146-2.1 4.796-2.01 1.954.1 3.714 1.22 4.601 3.01.896 1.81.846 4.17-.514 6.67z"/></svg> 22.7K</button>
-            <button class="action action-share"><svg viewBox="0 0 24 24"><path d="M12 3.786l6.364 6.364-1.414 1.414L13 7.614v10.6h-2V7.614L6.95 11.564 5.536 10.15 12 3.786zM4 20h16v-5h2v6a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-6h2v5z"/></svg></button>
+            <button class="action action-reply"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg> 2.1K</button>
+            <button class="action action-retweet"><svg viewBox="0 0 24 24"><path d="M17 1l4 4-4 4M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4M21 13v2a4 4 0 01-4 4H3"/></svg> 8.4K</button>
+            <button class="action action-like"><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 00-7.8 7.8l1 1.1 7.8 7.8 7.8-7.8 1-1.1a5.5 5.5 0 000-7.8z"/></svg> 22.7K</button>
+            <button class="action action-share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8M16 6l-4-4-4 4M12 2v13"/></svg></button>
           </div>
         </div>
       </div>
@@ -574,24 +332,29 @@
             My 16-year-old asked for rhinoplasty last month. I almost said yes. This stopped me cold. We had a real conversation instead — about where the insecurity came from. Hardest and best talk we've ever had.
           </div>
           <div class="reply-actions">
-            <button class="action action-reply"><svg viewBox="0 0 24 24"><path d="M1.751 10c0-4.42 3.584-8 8.005-8h4.488c4.42 0 8.005 3.58 8.005 8s-3.584 8-8.005 8h-2.06l-4.693 4.692c-.46.46-1.234.15-1.234-.54V17c-2.67-.88-4.506-3.42-4.506-7z"/></svg> 723</button>
-            <button class="action action-retweet"><svg viewBox="0 0 24 24"><path d="M4.5 3.88l4.432 4.14-1.364 1.46L5.5 7.55V16c0 1.1.896 2 2 2H13v2H7.5c-2.209 0-4-1.79-4-4V7.55L1.432 9.48.068 8.02 4.5 3.88zM16.5 6H11V4h5.5c2.209 0 4 1.79 4 4v8.45l2.068-1.93 1.364 1.46-4.432 4.14-4.432-4.14 1.364-1.46 2.068 1.93V8c0-1.1-.896-2-2-2z"/></svg> 1.8K</button>
-            <button class="action action-like"><svg viewBox="0 0 24 24"><path d="M16.697 5.5c-1.222-.06-2.679.51-3.89 2.16l-.805 1.09-.806-1.09C9.984 6.01 8.526 5.44 7.304 5.5c-1.243.07-2.349.78-2.91 1.91-.552 1.12-.633 2.78.479 4.82 1.074 1.97 3.257 4.27 7.129 6.61 3.87-2.34 6.052-4.64 7.126-6.61 1.111-2.04 1.03-3.7.477-4.82-.561-1.13-1.666-1.84-2.908-1.91zm4.187 7.69c-1.351 2.48-4.001 5.12-8.379 7.67l-.503.3-.504-.3c-4.379-2.55-7.029-5.19-8.382-7.67-1.36-2.5-1.41-4.86-.514-6.67.887-1.79 2.647-2.91 4.601-3.01 1.651-.09 3.368.56 4.798 2.01 1.429-1.45 3.146-2.1 4.796-2.01 1.954.1 3.714 1.22 4.601 3.01.896 1.81.846 4.17-.514 6.67z"/></svg> 5.4K</button>
-            <button class="action action-share"><svg viewBox="0 0 24 24"><path d="M12 3.786l6.364 6.364-1.414 1.414L13 7.614v10.6h-2V7.614L6.95 11.564 5.536 10.15 12 3.786zM4 20h16v-5h2v6a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-6h2v5z"/></svg></button>
+            <button class="action action-reply"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg> 723</button>
+            <button class="action action-retweet"><svg viewBox="0 0 24 24"><path d="M17 1l4 4-4 4M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4M21 13v2a4 4 0 01-4 4H3"/></svg> 1.8K</button>
+            <button class="action action-like"><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 00-7.8 7.8l1 1.1 7.8 7.8 7.8-7.8 1-1.1a5.5 5.5 0 000-7.8z"/></svg> 5.4K</button>
+            <button class="action action-share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8M16 6l-4-4-4 4M12 2v13"/></svg></button>
           </div>
         </div>
       </div>
     </div>
 
-    <div style="height:3rem;"></div>
+    <div style="display:flex;justify-content:center;padding:2rem;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1d9bf0" stroke-width="2.5" stroke-linecap="round">
+        <style>@keyframes spin{to{transform:rotate(360deg)}}</style>
+        <path d="M12 2a10 10 0 019.5 6.8" style="animation:spin .8s linear infinite;transform-origin:center;"/>
+      </svg>
+    </div>
   </main>
 
   <!-- ===== RIGHT SIDEBAR ===== -->
   <aside class="sidebar-right">
     <div class="sidebar-right-inner">
     <div class="search-box">
-      <svg viewBox="0 0 24 24"><path d="M10.25 3.75a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13zm-5 6.5a5 5 0 1 1 10 0 5 5 0 0 1-10 0zm11.941.5l3.555 3.554-1.061 1.06-3.554-3.554 1.06-1.06z"/></svg>
-      <input type="text" placeholder="Search" readonly>
+      <svg viewBox="0 0 24 24" style="fill:none;stroke:#71767b;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      <input type="text" placeholder="Search">
     </div>
 
     <div class="side-card">
@@ -612,8 +375,8 @@
         <div class="trend-count">34.7K posts</div>
       </div>
       <div class="trend-item">
-        <div class="trend-cat">Healthcare · Trending</div>
-        <div class="trend-name">AI Generated Content</div>
+        <div class="trend-cat">Lifestyle · Trending</div>
+        <div class="trend-name">#BeautyStandards</div>
         <div class="trend-count">256K posts</div>
       </div>
       <div class="side-showmore">Show more</div>
@@ -626,7 +389,8 @@
           <img src="Profile_Picture_Images/1054089f269ec953033c83145d25802a.png" style="width:100%;height:100%;object-fit:cover;">
         </div>
         <div style="flex:1;min-width:0;">
-          <div style="font-weight:700;font-size:0.875rem;">Dr. Sarah Kim <span style="font-weight:400;color:#71767b;">@DrSarahKimMD</span></div>
+          <div style="font-weight:700;font-size:0.875rem;">Dr. Sarah Kim</div>
+          <div style="font-size:0.8125rem;color:#71767b;">@DrSarahKimMD</div>
         </div>
         <button class="follow-btn-sm">Follow</button>
       </div>
@@ -635,7 +399,18 @@
           <img src="Profile_Picture_Images/519d2c4598073dd1409afb2d68157d61.png" style="width:100%;height:100%;object-fit:cover;">
         </div>
         <div style="flex:1;min-width:0;">
-          <div style="font-weight:700;font-size:0.875rem;">maya <span style="font-weight:400;color:#71767b;">@mayainrecovery</span></div>
+          <div style="font-weight:700;font-size:0.875rem;">maya</div>
+          <div style="font-size:0.8125rem;color:#71767b;">@mayainrecovery</div>
+        </div>
+        <button class="follow-btn-sm">Follow</button>
+      </div>
+      <div class="trend-item" style="display:flex;align-items:center;gap:0.625rem;">
+        <div style="width:2.5rem;height:2.5rem;border-radius:50%;overflow:hidden;flex-shrink:0;">
+          <img src="Profile_Picture_Images/699bfaf05e19b8b65efb0be20e332f3a.png" style="width:100%;height:100%;object-fit:cover;">
+        </div>
+        <div style="flex:1;min-width:0;">
+          <div style="font-weight:700;font-size:0.875rem;">Rainniies</div>
+          <div style="font-size:0.8125rem;color:#71767b;">@Rainniies</div>
         </div>
         <button class="follow-btn-sm">Follow</button>
       </div>
@@ -661,59 +436,7 @@
   <div class="lightbox-counter" id="lightboxCounter">1 / 4</div>
 </div>
 
-<script>
-(function() {
-  var images = document.querySelectorAll('.grid-img');
-  var lightbox = document.getElementById('lightbox');
-  var lightboxImg = document.getElementById('lightboxImg');
-  var lightboxCounter = document.getElementById('lightboxCounter');
-  var currentIndex = 0;
-
-  function openLightbox(index) {
-    currentIndex = index;
-    lightboxImg.src = images[currentIndex].src;
-    lightboxCounter.textContent = (currentIndex + 1) + ' / ' + images.length;
-    lightbox.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeLightbox() {
-    lightbox.classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
-  function showPrev() {
-    currentIndex = (currentIndex - 1 + images.length) % images.length;
-    lightboxImg.src = images[currentIndex].src;
-    lightboxCounter.textContent = (currentIndex + 1) + ' / ' + images.length;
-  }
-
-  function showNext() {
-    currentIndex = (currentIndex + 1) % images.length;
-    lightboxImg.src = images[currentIndex].src;
-    lightboxCounter.textContent = (currentIndex + 1) + ' / ' + images.length;
-  }
-
-  images.forEach(function(img, i) {
-    img.addEventListener('click', function() { openLightbox(i); });
-  });
-
-  document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
-  document.getElementById('lightboxPrev').addEventListener('click', showPrev);
-  document.getElementById('lightboxNext').addEventListener('click', showNext);
-
-  lightbox.addEventListener('click', function(e) {
-    if (e.target === lightbox) closeLightbox();
-  });
-
-  document.addEventListener('keydown', function(e) {
-    if (!lightbox.classList.contains('open')) return;
-    if (e.key === 'Escape') closeLightbox();
-    if (e.key === 'ArrowLeft') showPrev();
-    if (e.key === 'ArrowRight') showNext();
-  });
-})();
-</script>
+<script src="js/lightbox.js"></script>
 
 </body>
 </html>
